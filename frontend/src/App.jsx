@@ -1,9 +1,28 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import Navbar from './component/Navbar'
+import Home from './page/Home'
+import { Route, Routes } from 'react-router-dom'
+import Profile from './page/Profile'
+import Login from './page/Login'
+import { AuthContext } from './context/AuthContext'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
+  const {token}=useContext(AuthContext)
   return (
     <div>
-      <h1 className='text-3xl font-bold underline'>Hello World</h1>
+      {
+        token? <Navbar />: <Login/>
+      }
+      
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/profile' element={<Profile />} />
+      </Routes>
+      <ToastContainer position="top-right" autoClose={3000} />
+
+      
     </div>
   )
 }
