@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(localStorage.getItem('token') || '');
     const [signup, setSignup] = useState(true);
     const [quiz, setQuiz] = useState([null]);
-
+    const [question,setQuestion]=useState([]);
     const fetchQuiz = async () => {
         try {
 
@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
 
 
     return (
-        <AuthContext.Provider value={{ token, setToken, signup, setSignup,fetchQuiz,quiz,setQuiz  }}>
+        <AuthContext.Provider value={{question,setQuestion, token, setToken, signup, setSignup,fetchQuiz,quiz,setQuiz  }}>
             {children}
         </AuthContext.Provider>
     )

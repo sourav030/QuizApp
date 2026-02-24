@@ -116,7 +116,7 @@ export async function login(req, res) {
         role: user.role,
       },
       JWT_SECRET,
-      // { expiresIn: TOKEN_EXPIRES_IN }
+     
     );
 
     

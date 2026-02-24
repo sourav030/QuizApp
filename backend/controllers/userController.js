@@ -46,7 +46,7 @@ export async function submitAns(req, res) {
   try {
     const { quizId, quesId, submitAns } = req.body;
 
-    // 1️⃣ Check quiz
+  
     const quiz = await Quiz.findById(quizId);
     if (!quiz) {
       return res.status(404).json({
@@ -55,7 +55,7 @@ export async function submitAns(req, res) {
       });
     }
 
-    // 2️⃣ Check question
+   
     const question = await Question.findById(quesId);
     if (!question) {
       return res.status(404).json({
@@ -64,7 +64,7 @@ export async function submitAns(req, res) {
       });
     }
 
-    // 3️⃣ Verify question belongs to quiz
+    
     if (question.quizId.toString() !== quizId) {
       return res.status(400).json({
         success: false,
@@ -72,7 +72,7 @@ export async function submitAns(req, res) {
       });
     }
 
-    // 4️⃣ Prevent duplicate submission
+  
     const alreadySubmitted = await Submission.findOne({
       quizId,
       quesId,
@@ -86,14 +86,14 @@ export async function submitAns(req, res) {
       });
     }
 
-    // 5️⃣ Calculate marks
+   
     const marks =
       question.correctAnswer.trim().toLowerCase() ===
       submitAns.trim().toLowerCase()
         ? 1
         : 0;
 
-    // 6️⃣ Save submission
+  
     const submission = await Submission.create({
       quizId,
       quesId,
@@ -102,7 +102,7 @@ export async function submitAns(req, res) {
       answerBy: req.user._id
     });
 
-    // 7️⃣ Response
+   
     return res.status(200).json({
       success: true,
       message: "Answer submitted successfully",
@@ -180,7 +180,7 @@ export const getQuizResult = async (req, res) => {
     const { quizId } = req.params;
     const userId = req.user._id;
 
-    // check quiz exists
+   
     const quiz = await Quiz.findById(quizId);
     if (!quiz) {
       return res.status(404).json({
@@ -189,7 +189,7 @@ export const getQuizResult = async (req, res) => {
       });
     }
 
-    // aggregation
+   
     const result = await Submission.aggregate([
       {
         $match: {
