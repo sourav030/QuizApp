@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 export const connectDb=async()=>{
     try{
-        await mongoose.connect('mongodb+srv://souravtiwari139_db_user:bZoGHzGkBzAtFmr5@cluster0.6pclyvc.mongodb.net/?appName=Cluster0/quizApp')
+        await mongoose.connect(process.env.MONGO_URI)
         console.log("Db connect Successfully");
     }
     catch(err){
