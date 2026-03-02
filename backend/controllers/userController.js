@@ -3,6 +3,7 @@ import Quiz from '../models/uqizModel.js';
 import Question from '../models/quesModel.js'
 import Submission from '../models/submissionModel.js';
 import Result from '../models/submitQuiz.js';
+import mappedResult from '../dto/result.dto.js';
 
 export async function getAllQuiz(req, res) {
     try {
@@ -225,6 +226,25 @@ export const getQuizResult = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({
+      success: false,
+      message: "Server error"
+    });
+  }
+};
+
+export const getAllResults = async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const results = await Result.find({ userId }).populate('quizId', 'title').populate('userId', '-password');
+    const data=mappedResult(results)
+    console.log(data);
+    return res.status(200).json({
+      success: true,
+      data
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({  
       success: false,
       message: "Server error"
     });
