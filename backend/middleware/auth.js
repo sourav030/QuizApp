@@ -5,6 +5,8 @@ const JWT_SECRET = "JWT_SECRET_HAI_YE";
 
 export async function authMiddleware(req,res,next){
     const authHead=req.headers.authorization;
+    console.log('ye token');
+    console.log(authHead)
     if(!authHead){
         return res.status(401).json({
             success:false,

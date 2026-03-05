@@ -66,7 +66,7 @@ const Quiz = ({ data }) => {
         </div>
       </div>
 
-      {/* Action Button */}
+      
       <Link to={`/question/${data._id}`} className="w-full">
         <button
           onClick={getQuestion}

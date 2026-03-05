@@ -7,7 +7,7 @@ import mappedResult from '../dto/result.dto.js';
 
 export async function getAllQuiz(req, res) {
     try {
-
+        console.log('request a gya')
         const allQuiz=await Quiz.find();
         return res.status(200).json({
             success:true,
@@ -237,7 +237,7 @@ export const getAllResults = async (req, res) => {
     const userId = req.user._id;
     const results = await Result.find({ userId }).populate('quizId', 'title').populate('userId', '-password');
     const data=mappedResult(results)
-    console.log(data);
+   
     return res.status(200).json({
       success: true,
       data
