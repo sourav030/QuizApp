@@ -12,6 +12,8 @@ export const AuthProvider = ({ children }) => {
     const [signup, setSignup] = useState(true);
     const [quiz, setQuiz] = useState([null]);
     const [question, setQuestion] = useState([]);
+    const [totalQuestions, setTotalQuestions] = useState('');
+    const [quizId,setQuizId]=useState('');
 
     const fetchQuiz = async () => {
         try {
@@ -29,7 +31,7 @@ export const AuthProvider = ({ children }) => {
 
             setQuiz(result.data.allQuiz)
 
-            navigate("/")   // ✅ this works
+            navigate("/")  
 
         }
         catch(err){
@@ -43,7 +45,9 @@ export const AuthProvider = ({ children }) => {
             token,setToken,
             signup,setSignup,
             fetchQuiz,
-            quiz,setQuiz
+            quiz,setQuiz,
+            totalQuestions, setTotalQuestions,
+            quizId,setQuizId
         }}>
             {children}
         </AuthContext.Provider>

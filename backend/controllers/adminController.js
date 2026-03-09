@@ -4,29 +4,42 @@ import Question from '../models/quesModel.js'
 
 export async function createQuiz(req, res) {
     try {
-        const { title, description } = req.body;
+
+        const { title, description, shortName, level, time, totalQuestions } = req.body;
         const userId = req.user._id;
-        if (!title || !description) {
-            return res.status(403).json({
+
+        if (!title || !description || !shortName) {
+            return res.status(400).json({
                 success: false,
-                message: 'Invalid Quiz Format'
-            })
+                message: "Invalid Quiz Format"
+            });
         }
+
         const quiz = await Quiz.create({
             title,
             description,
+            shortName,
+            level,
+            time,
+            totalQuestions,
             createdBy: userId
-        })
-        return res.status(200).json({
+        });
+
+        return res.status(201).json({
             success: true,
             message: "Quiz Created Successfully",
             quiz
-        })
+        });
+
     } catch (err) {
+
         console.log(err);
-        return res.status(400).json({
+
+        return res.status(500).json({
+            success: false,
             message: "Server Side Error"
-        })
+        });
+
     }
 }
 

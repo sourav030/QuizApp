@@ -10,6 +10,7 @@ import Question from './page/Question'
 import Footer from './component/Footer'
 import CreateQuiz from './page/CreateQuiz'
 import ProtectedRoute from './page/Protactive'
+import CreateQuestion from './page/CreateQuestion'
 
 const App = () => {
 
@@ -49,6 +50,15 @@ const App = () => {
           element={
             <ProtectedRoute>
               <CreateQuiz />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/addquestion"
+          element={
+            <ProtectedRoute>
+              <CreateQuestion/>
             </ProtectedRoute>
           }
         />
